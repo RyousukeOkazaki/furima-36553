@@ -15,7 +15,7 @@
 
 ### Association
 - has_many :items
-- has_many :users_orders
+- has_many :orders, through: :users_orders
 
 
 
@@ -64,7 +64,7 @@
 | user        | references | null: false, foreign_key: true |
 
 ### Association
-- has_many :users_orders
+- has_many users, through: :users_orders
 - has_one :address
 - belongs_to :item
 
