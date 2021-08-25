@@ -15,7 +15,7 @@
 
 ### Association
 - has_many :items
-- has_many :orders, through: :users_orders
+- has_many :orders
 
 
 
@@ -64,21 +64,9 @@
 | user        | references | null: false, foreign_key: true |
 
 ### Association
-- has_many users, through: :users_orders
+- belongs_to :user
 - has_one :address
 - belongs_to :item
 
-
-
-## users_ordersテーブル
-
-| Column    | Type       | Options                        |
-| --------- | ---------- | ------------------------------ |
-| user      | references | null: false, foreign_key: true |
-| order    | references | null: false, foreign_key: true |
-
-### Association
-- belongs_to :order
-- belongs_to :user
 
 
