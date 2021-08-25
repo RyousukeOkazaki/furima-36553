@@ -6,8 +6,6 @@
 | ------------------ | ------ | ------------------------- |
 | last_name          | string | null: false               |
 | first_name         | string | null: false               |
-| sex                | string | null: false               |
-| age                | string | null: false               |
 | nickname           | string | null: false               |
 | email              | string | null: false               |
 | encrypted_password | string | null: false, unique: true |
@@ -21,19 +19,17 @@
 
 ## itemsテーブル
 
-| Column        | Type       | Options                        |
-| ------------- | ---------- | ------------------------------ |
-| name          | string     | null: false                    |
-| description   | text       | null: false                    |
-| price         | integer    | null: false                    |
-| category      | string     | null: false                    |
-| owner         | string     | null: false                    |
-| image         | 
-| status        | string     | null: false |
-| fee           | integer    | null: false |
-| prefecture    | string     | null: false |
-| delivery_days | integer    | null: false |
-| orders_id     | references | null: false, foreign_key: true |
+| Column           | Type       | Options                        |
+| ---------------- | ---------- | ------------------------------ |
+| name             | string     | null: false                    |
+| description      | text       | null: false                    |
+| price            | integer    | null: false                    |
+| category_id      | integer    | null: false                    |
+| status_id        | integer    | null: false |
+| fee_id           | integer    | null: false |
+| prefecture_id    | integer    | null: false |
+| delivery_days_id | integer    | null: false |
+| orders_id        | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :user
@@ -42,15 +38,15 @@
 
 ## addressesテーブル
 
-| Column      | Type       | Options                        |
-| ----------- | ---------- | ------------------------------ |
-| tel         | integer    | null: false                    |
-| postal_code | integer    | null: false                    |
-| prefecture  | string     | null: false                    |
-| city        | string     | null: false                    |
-| address1    | string     | null: false                    |
-| address2    | string     | null: false                    |
-| user_id     | references | null: false, foreign_key: true |
+| Column        | Type       | Options                        |
+| ------------- | ---------- | ------------------------------ |
+| tel           | string     | null: false                    |
+| postal_code   | string     | null: false                    |
+| city          | string     | null: false                    |
+| address1      | string     | null: false                    |
+| address2      | string     | null: false                    |
+| prefecture_id | integer    | null: false                    |
+| user_id       | references | null: false, foreign_key: true |
 
 
 ### Association
@@ -63,10 +59,8 @@
 
 | Column       | Type       | Options                        |
 | ------------ | ---------- | ------------------------------ |
-| owner        | string     | null: false                    |
-| buyer        | string     | null: false                    |
 | items_id     | references | null: false, foreign_key: true |
-| addresses_id | references | null: false, foreign_key: true |
+| users_id     | references | null: false, foreign_key: true |
 
 ### Association
 - has_many :users_orders
