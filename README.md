@@ -26,12 +26,12 @@
 | name             | string     | null: false                    |
 | description      | text       | null: false                    |
 | price            | integer    | null: false                    |
-| category         | integer    | null: false                    |
-| status           | integer    | null: false |
-| fee              | integer    | null: false |
-| prefecture       | integer    | null: false |
-| delivery_days    | integer    | null: false |
-| users            | references | null: false, foreign_key: true |
+| category_id      | integer    | null: false                    |
+| status_id        | integer    | null: false |
+| fee_id           | integer    | null: false |
+| prefecture_id    | integer    | null: false |
+| delivery_days_id | integer    | null: false |
+| user            | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :user
@@ -47,12 +47,12 @@
 | city          | string     | null: false                    |
 | street        | string     | null: false                    |
 | building      | string     | null: false                    |
-| prefecture    | integer    | null: false                    |
-| orders        | references | null: false, foreign_key: true |
+| prefecture_id | integer    | null: false                    |
+| order        | references | null: false, foreign_key: true |
 
 
 ### Association
-- has_one :order
+- belongs_to :order
 
 
 
@@ -60,12 +60,12 @@
 
 | Column       | Type       | Options                        |
 | ------------ | ---------- | ------------------------------ |
-| items        | references | null: false, foreign_key: true |
-| users        | references | null: false, foreign_key: true |
+| item        | references | null: false, foreign_key: true |
+| user        | references | null: false, foreign_key: true |
 
 ### Association
 - has_many :users_orders
-- belongs_to :address
+- has_one :address
 - belongs_to :item
 
 
@@ -75,7 +75,7 @@
 | Column    | Type       | Options                        |
 | --------- | ---------- | ------------------------------ |
 | user      | references | null: false, foreign_key: true |
-| orders    | references | null: false, foreign_key: true |
+| order    | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :order
