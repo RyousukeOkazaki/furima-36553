@@ -33,6 +33,7 @@ RSpec.describe Item, type: :model do
       end
       it 'descriptionが空では登録できない' do
         @item.description = ''
+        @item.valid?
         expect(@item.errors.full_messages).to include("Description can't be blank")
       end
       it 'priceが空では登録できない' do
@@ -50,11 +51,28 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Price must be less than or equal to 9999999")
       end
-      it 'priceが数字以外では登録できない' do
+      it 'priceが文字では登録できない' do
         @item.price ="千"
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is not a number")
       end
+      it 'priceが全角数字では登録できない' do
+        @item.price ="２５５"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is not a number")
+      end
+      it 'priceが半角英数混合では登録できない' do
+        @item.price ="3million"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is not a number")
+      end
+      it 'priceが半角英語では登録できない' do
+        @item.price ="hundred"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is not a number")
+      end
+
+
       it 'category_idが1では登録できない' do
         @item.category_id = 1
         @item.valid?
@@ -78,12 +96,12 @@ RSpec.describe Item, type: :model do
       it 'dalivery_days_idが1では登録できない' do
         @item.delivery_days_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Delivery_days can't be blank")
+        expect(@item.errors.full_messages).to include("Delivery days can't be blank")
       end
       it 'userが紐づいていなければ登録できない' do
-        @item.user_id = nil
+        @item.user = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("User can't be blank")
+        expect(@item.errors.full_messages).to include("User must exist")
       end
 
 
