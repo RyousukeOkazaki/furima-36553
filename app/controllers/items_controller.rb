@@ -53,8 +53,7 @@ class ItemsController < ApplicationController
                                  :delivery_days_id, :image).merge(user_id: current_user.id)
   end
 
-  def  the_item
+  def the_item
     @item = Item.find(params[:id])
   end
-
 end
