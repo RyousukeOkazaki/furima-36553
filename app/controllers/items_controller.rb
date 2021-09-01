@@ -40,6 +40,12 @@ class ItemsController < ApplicationController
     end
   end
 
+  def destroy
+    the_item
+    @item.destroy
+    redirect_to root_path
+  end
+
   private
 
   def item_params
