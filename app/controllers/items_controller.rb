@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :the_item, only: [:show, :edit, :update]
 
   def index
@@ -40,6 +40,12 @@ class ItemsController < ApplicationController
     end
   end
 
+  def destroy
+    the_item
+    @item.destroy
+    redirect_to root_path
+  end
+
   private
 
   def item_params
@@ -47,8 +53,7 @@ class ItemsController < ApplicationController
                                  :delivery_days_id, :image).merge(user_id: current_user.id)
   end
 
-  def  the_item
+  def the_item
     @item = Item.find(params[:id])
   end
-
 end
