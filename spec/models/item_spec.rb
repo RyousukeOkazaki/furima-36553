@@ -15,7 +15,7 @@ RSpec.describe Item, type: :model do
         expect(@item).to be_valid
       end
       it '上限99999999以上のpriceは登録できる' do
-        @item.price = 9999999
+        @item.price = 9_999_999
         expect(@item).to be_valid
       end
     end
@@ -37,41 +37,40 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Description can't be blank")
       end
       it 'priceが空では登録できない' do
-        @item.price =''
+        @item.price = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Price can't be blank")
       end
-        it 'priceが300未満では登録できない' do
-        @item.price =299
+      it 'priceが300未満では登録できない' do
+        @item.price = 299
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be greater than or equal to 300")
+        expect(@item.errors.full_messages).to include('Price must be greater than or equal to 300')
       end
       it 'priceが9999999超過では登録できない' do
-        @item.price =10000000
+        @item.price = 10_000_000
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be less than or equal to 9999999")
+        expect(@item.errors.full_messages).to include('Price must be less than or equal to 9999999')
       end
       it 'priceが文字では登録できない' do
-        @item.price ="千"
+        @item.price = '千'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not a number")
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
       it 'priceが全角数字では登録できない' do
-        @item.price ="２５５"
+        @item.price = '２５５'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not a number")
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
       it 'priceが半角英数混合では登録できない' do
-        @item.price ="3million"
+        @item.price = '3million'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not a number")
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
       it 'priceが半角英語では登録できない' do
-        @item.price ="hundred"
+        @item.price = 'hundred'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not a number")
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
-
 
       it 'category_idが1では登録できない' do
         @item.category_id = 1
@@ -101,13 +100,8 @@ RSpec.describe Item, type: :model do
       it 'userが紐づいていなければ登録できない' do
         @item.user = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("User must exist")
+        expect(@item.errors.full_messages).to include('User must exist')
       end
-
-
-
-
-
     end
   end
 end
