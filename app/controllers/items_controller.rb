@@ -10,6 +10,13 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @item = Item.find(params[:id])
+    @user = User.find(@item.user_id)
+    @category = Category.find(@item.category_id)
+    @status = Status.find(@item.status_id)
+    @fee = Fee.find(@item.fee_id)
+    @prefecture = Prefecture.find(@item.prefecture_id)
+    @delivery_days = DeliveryDays.find(@item.delivery_days_id)
   end
 
   def edit
