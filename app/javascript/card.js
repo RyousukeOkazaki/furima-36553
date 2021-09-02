@@ -2,7 +2,7 @@ const pay = () => {
   Payjp.setPublicKey("pk_test_6b87c404c86f92f28369dfb7");
   const submit = document.getElementById("button");
   submit.addEventListener("click", (e) => {
-    e.preventDefault();
+    //e.preventDefault();
     console.log("フォーム送信時にイベント発火")
 
     const formResult = document.getElementById("charge-form");
