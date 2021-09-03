@@ -18,11 +18,11 @@ RSpec.describe OrderAddress, type: :model do
         expect(@order_address).to be_valid
       end
       it 'telは最低10桁の半角数字なら登録できること' do
-        @order_address.tel = 1_234_567_890
+        @order_address.tel = "1234567890"
         expect(@order_address).to be_valid
       end
       it 'telは最高11桁の半角数字なら登録できること' do
-        @order_address.tel = 12_345_678_901
+        @order_address.tel = "12345678901"
         expect(@order_address).to be_valid
       end
       it 'buildingは空でも保存できること' do
@@ -40,22 +40,22 @@ RSpec.describe OrderAddress, type: :model do
       it 'postal_codeが「-」を挟まないと保存できないこと' do
         @order_address.postal_code = '1234567'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Postal code is invalid. Include hyphen(-)')
+        expect(@order_address.errors.full_messages).to include('Postal code is invalid.')
       end
       it 'postal_codeの「-」前が「3桁の半角数字」でないと保存できないこと' do
         @order_address.postal_code = '1234-567'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Postal code is invalid. Include hyphen(-)')
+        expect(@order_address.errors.full_messages).to include('Postal code is invalid.')
       end
       it 'postal_codeの「-」後が「4桁の半角数字」でないと保存できないこと' do
         @order_address.postal_code = '123-456'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Postal code is invalid. Include hyphen(-)')
+        expect(@order_address.errors.full_messages).to include('Postal code is invalid.')
       end
       it 'postal_codeが「全角数字」では保存できないこと' do
         @order_address.postal_code = '１２３−４５６７'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Postal code is invalid. Include hyphen(-)')
+        expect(@order_address.errors.full_messages).to include('Postal code is invalid.')
       end
       it 'prefecture_idが空だと保存できないこと' do
         @order_address.prefecture_id = ''

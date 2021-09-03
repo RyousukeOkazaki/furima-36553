@@ -5,8 +5,6 @@ class OrdersController < ApplicationController
 
   def index
     @order_address = OrderAddress.new
-    
-    @order = Order.new
   end
 
   def create

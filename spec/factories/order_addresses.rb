@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :order_address do
-    tel { 1_234_567_890 }
+    tel { "1234567890" }
     postal_code { '123-4567' }
     city { '大阪市' }
     street { '生野区' }
