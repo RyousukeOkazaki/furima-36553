@@ -3,7 +3,7 @@ class OrderAddress
   attr_accessor :tel, :postal_code, :city, :street, :building, :prefecture_id, :item_id, :user_id, :token
 
   with_options presence: true do
-    validates :tel
+    validates :tel        , format: {with: /\A\d{10,11}\z/}
     validates :postal_code, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)"}
     validates :city
     validates :street
