@@ -7,12 +7,11 @@ class OrderAddress
     validates :postal_code, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: 'is invalid. Include hyphen(-)' }
     validates :city
     validates :street
-    validates :prefecture_id
+    validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" }
     validates :item_id
     validates :user_id
     validates :token
   end
-  # validates :building
 
   def save
     order = Order.create(item_id: item_id, user_id: user_id)

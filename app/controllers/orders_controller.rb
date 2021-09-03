@@ -1,18 +1,16 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, only: [:index, :create]
+  before_action :definition, only: [:index, :create]
+  before_action :redirect, only: [:index, :create]
 
   def index
     @order_address = OrderAddress.new
-    @item = Item.find(params[:item_id])
-    @fee = Fee.find(@item.fee_id)
+    
     @order = Order.new
-    redirect_to root_path if @item.user_id == current_user.id || !@item.order.nil?
   end
 
   def create
     @order_address = OrderAddress.new(order_params)
-    @item = Item.find(params[:item_id])
-    @fee = Fee.find(@item.fee_id)
 
     if @order_address.valid?
       pay_item
@@ -39,4 +37,14 @@ class OrdersController < ApplicationController
       currency: 'jpy'
     )
   end
+
+  def definition
+    @item = Item.find(params[:item_id])
+    @fee = Fee.find(@item.fee_id)
+  end
+
+  def redirect
+    redirect_to root_path if @item.user_id == current_user.id || !@item.order.nil?
+  end
+
 end
