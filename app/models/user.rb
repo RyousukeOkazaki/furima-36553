@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   has_many :items
   has_many :orders
+  has_one :shipping_address
 
   validates :nickname, presence: true
   validates :password,
