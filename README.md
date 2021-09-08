@@ -16,6 +16,8 @@
 ### Association
 - has_many :items
 - has_many :orders
+- has_many :sns_credentials
+- has_one :shipping_address
 
 
 
@@ -31,7 +33,7 @@
 | fee_id           | integer    | null: false |
 | prefecture_id    | integer    | null: false |
 | delivery_days_id | integer    | null: false |
-| user            | references | null: false, foreign_key: true |
+| user             | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :user
@@ -48,7 +50,7 @@
 | street        | string     | null: false                    |
 | building      | string     |                                |
 | prefecture_id | integer    | null: false                    |
-| order        | references | null: false, foreign_key: true |
+| order         | references | null: false, foreign_key: true |
 
 
 ### Association
@@ -60,8 +62,8 @@
 
 | Column       | Type       | Options                        |
 | ------------ | ---------- | ------------------------------ |
-| item        | references | null: false, foreign_key: true |
-| user        | references | null: false, foreign_key: true |
+| item         | references | null: false, foreign_key: true |
+| user         | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :user
@@ -70,3 +72,31 @@
 
 
 
+## shipping_addressesテーブル
+
+| Column        | Type       | Options                        |
+| ------------- | ---------- | ------------------------------ |
+| tel           | string     | null: false                    |
+| postal_code   | string     | null: false                    |
+| city          | string     | null: false                    |
+| street        | string     | null: false                    |
+| building      | string     |                                |
+| prefecture_id | integer    | null: false                    |
+| user          | references | null: false, foreign_key: true |
+
+
+### Association
+- belongs_to :user
+
+
+## sns_credentialsテーブル
+
+| Column      | Type       | Options           |
+| ----------- | ---------- | ----------------- |
+| provider    | string     |                   |
+| uid         | string     |                   |
+| user        | references | foreign_key: true |
+
+
+### Association
+- belongs_to :user
